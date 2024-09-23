@@ -6,8 +6,15 @@ import { Button } from '../ui/button'
 import { ReloadIcon } from '@radix-ui/react-icons'
 
 const StartSimulation = () => {
-    const { loading, startSimulation } = usePlayground()
+    const { loading, startSimulation, serverUp } = usePlayground()
 
+
+    if (!serverUp) return (
+        <div>
+            <Button disabled>
+                Server is down
+            </Button>
+        </div>)
 
     if (loading) return (<div>
         <Button disabled>

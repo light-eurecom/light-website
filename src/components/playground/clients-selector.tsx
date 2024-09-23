@@ -6,6 +6,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { usePlayground } from "@/context/PlaygroundContext"
+import clsx from "clsx"
 
 interface ClientsSelectorProps {
   defaultValue: SliderProps["defaultValue"]
@@ -13,7 +14,7 @@ interface ClientsSelectorProps {
 
 export function ClientsSelector({ defaultValue }: ClientsSelectorProps) {
   // Access the clients value and setter from the PlaygroundContext
-  const { clients, setClients } = usePlayground()
+  const { clients, setClients, serverUp } = usePlayground()
   return (
     <div className="grid gap-2 pt-2">
       <HoverCard openDelay={200}>
@@ -26,6 +27,7 @@ export function ClientsSelector({ defaultValue }: ClientsSelectorProps) {
               </span>
             </div>
             <Slider
+              disabled={!serverUp}
               defaultValue={defaultValue}
               id="clients"
               max={10}
@@ -33,7 +35,7 @@ export function ClientsSelector({ defaultValue }: ClientsSelectorProps) {
               step={1}
               min={1}
               onValueChange={setClients}  // Use the new handler
-              className="[&_[role=slider]]:h-4 [&_[role=slider]]:w-4"
+              className={clsx("[&_[role=slider]]:h-4 [&_[role=slider]]:w-4", !serverUp && "opacity-50")}
               aria-label="Number of receivers"
             />
           </div>

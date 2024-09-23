@@ -23,6 +23,7 @@ import {
 
 import { fetcher } from "@/lib/fetcher"
 import Link from "next/link"
+import { usePlayground } from "@/context/PlaygroundContext"
 
 interface SimulationSelectorProps extends PopoverProps {
   simulationId: string
@@ -31,6 +32,7 @@ interface SimulationSelectorProps extends PopoverProps {
 export function SimulationSelector({ simulationId, ...props }: SimulationSelectorProps) {
   const [open, setOpen] = React.useState(false)
   const [selectedPreset, setSelectedPreset] = React.useState<string>(simulationId)
+  const { serverUp } = usePlayground()
 
   const { data: simulations, isLoading } = useSWR('http://127.0.0.1:5002/simulations', fetcher, { revalidateOnFocus: true })
 
@@ -38,7 +40,7 @@ export function SimulationSelector({ simulationId, ...props }: SimulationSelecto
     <Popover open={open} onOpenChange={setOpen} {...props}>
       <PopoverTrigger asChild>
         <Button
-          disabled={isLoading}
+          disabled={isLoading || !serverUp}
           variant="outline"
           role="combobox"
           aria-label="Load a simulation..."

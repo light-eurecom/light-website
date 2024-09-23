@@ -6,6 +6,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { usePlayground } from "@/context/PlaygroundContext"
+import clsx from "clsx"
 
 interface RoutersSelectorProps {
   defaultValue: SliderProps["defaultValue"]
@@ -13,7 +14,7 @@ interface RoutersSelectorProps {
 
 export function RoutersSelector({ defaultValue }: RoutersSelectorProps) {
   // Access the routers value and setter from the PlaygroundContext
-  const { routers, setRouters } = usePlayground()
+  const { routers, setRouters, serverUp } = usePlayground()
   return (
     <div className="grid gap-2 pt-2">
       <HoverCard openDelay={200}>
@@ -27,13 +28,14 @@ export function RoutersSelector({ defaultValue }: RoutersSelectorProps) {
             </div>
             <Slider
               defaultValue={defaultValue}
+              disabled={!serverUp}
               id="multicast_routers"
               max={10}
               value={routers}
               step={1}
               min={1}
               onValueChange={setRouters}  // Use the new handler
-              className="[&_[role=slider]]:h-4 [&_[role=slider]]:w-4"
+              className={clsx("[&_[role=slider]]:h-4 [&_[role=slider]]:w-4", !serverUp && "opacity-50")}
               aria-label="Number of multicast routers"
             />
           </div>

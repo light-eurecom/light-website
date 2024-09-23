@@ -25,7 +25,8 @@ interface PlaygroundContextType {
     setShowLegend: (state: boolean) => void;
     showLegend: boolean,
     setShowTitle: (state: boolean) => void;
-    showTitle: boolean
+    showTitle: boolean,
+    serverUp: boolean | null
 }
 
 export const PlaygroundContext = createContext<PlaygroundContextType | undefined>(undefined);
@@ -38,8 +39,26 @@ export function PlaygroundProvider({ children }: { children: ReactNode }) {
     const [showStartDialog, setShowStartDialog] = useState(false)
     const [showLegend, setShowLegend] = useLocalStorage("SHOW_LEGEND", false)
     const [showTitle, setShowTitle] = useLocalStorage("SHOW_TITLE", false)
+    const [serverUp, setServerUp] = useState<boolean | null>(null);  // State to track server status
 
     const router = useRouter()
+
+
+
+    useEffect(() => {
+        const checkServerStatus = async () => {
+            try {
+                const { data } = await axios.get("http://127.0.0.1:5002/health");  // Flask health endpoint
+                if (data.status === "ok") {
+                    setServerUp(true);
+                }
+            } catch (error) {
+                setServerUp(false);
+            }
+        };
+        checkServerStatus();
+    }, []);
+
 
     const start = async () => {
         setLoading(true)
@@ -61,7 +80,7 @@ export function PlaygroundProvider({ children }: { children: ReactNode }) {
             toast({
                 title: "Error",
                 variant: "destructive",
-                description: "`An error occured with the remote server. It might be down.`",
+                description: "An error occured with the remote server. It might be down.",
             })
         }
         setLoading(false)
@@ -73,7 +92,7 @@ export function PlaygroundProvider({ children }: { children: ReactNode }) {
 
 
     return (
-        <PlaygroundContext.Provider value={{ clients, setClients, routers, setRouters, loading, startSimulation, setShowLegend, showLegend, setShowTitle, showTitle }}>
+        <PlaygroundContext.Provider value={{ clients, setClients, routers, setRouters, loading, startSimulation, setShowLegend, showLegend, setShowTitle, showTitle, serverUp }}>
             {children}
             <AlertDialog open={showStartDialog} onOpenChange={setShowStartDialog}>
                 <AlertDialogContent>

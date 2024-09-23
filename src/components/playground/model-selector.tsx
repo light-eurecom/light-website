@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/popover"
 
 import { Model, ModelType } from "./data/models"
+import { usePlayground } from "@/context/PlaygroundContext"
 
 interface ModelSelectorProps extends PopoverProps {
   types: readonly ModelType[]
@@ -38,6 +39,7 @@ export function ModelSelector({ models, types, ...props }: ModelSelectorProps) {
   const [open, setOpen] = React.useState(false)
   const [selectedModel, setSelectedModel] = React.useState<Model>(models[0])
   const [peekedModel, setPeekedModel] = React.useState<Model>(models[0])
+  const { serverUp } = usePlayground()
 
   return (
     <div className="grid gap-2">
@@ -57,6 +59,7 @@ export function ModelSelector({ models, types, ...props }: ModelSelectorProps) {
       <Popover open={open} onOpenChange={setOpen} {...props}>
         <PopoverTrigger asChild>
           <Button
+            disabled={!serverUp}
             variant="outline"
             role="combobox"
             aria-expanded={open}
