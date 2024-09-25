@@ -16,7 +16,7 @@ const checkServerStatus = async () => {
 export async function middleware(request: NextRequest) {
     if (await checkServerStatus() == false) {
         console.log("server down.")
-        return NextResponse.redirect(new URL('/local', request.url))
+        return NextResponse.redirect(new URL('/demo', request.url))
     }
 }
 
