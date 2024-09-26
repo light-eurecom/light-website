@@ -14,7 +14,7 @@ import { CodeViewer } from "@/components/playground/code-viewer"
 import { RoutersSelector } from "@/components/playground/routers-selector"
 import { ModelSelector } from "@/components/playground/model-selector"
 import { PresetActions } from "@/components/playground/preset-actions"
-import { PresetSave } from "@/components/playground/preset-save"
+// import { PresetSave } from "@/components/playground/preset-save"
 import { SimulationSelector } from "@/components/playground/simulation-selector"
 import { PresetShare } from "@/components/playground/preset-share"
 import { ClientsSelector } from "@/components/playground/clients-selector"
@@ -74,7 +74,7 @@ export default function PlaygroundLayout({
                         <div className="grid items-stretch sticky top-0 h-full">
                             <ResizablePanelGroup
                                 direction="horizontal"
-                                className="rounded-lg border md:min-w-[250px]"
+                                className="rounded-lg border"
                             >
                                 <ResizablePanel defaultSize={75}>
                                     <div className="md:order-1 h-full w-full overflow-hidden">
@@ -82,7 +82,7 @@ export default function PlaygroundLayout({
                                     </div>
                                 </ResizablePanel>
                                 <ResizableHandle />
-                                <ResizablePanel defaultSize={20} minSize={20}>
+                                <ResizablePanel defaultSize={20} minSize={20} maxSize={40} className="min-w-[300px]">
                                     <div className="flex-col border-l h-full space-y-4 md:flex md:order-2 p-3">
                                         <div className="grid gap-2 p-3">
                                             <HoverCard openDelay={200}>
