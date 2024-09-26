@@ -59,7 +59,7 @@ export default function PlaygroundLayout({
                     </Link>
                     <div className="ml-auto md:flex hidden w-full space-x-2 sm:justify-end">
                         <SimulationSelector simulationId={simulationId} />
-                        {simulationId && <PresetSave />}
+                        {/* {simulationId && <PresetSave />} */}
                         {simulationId &&
                             <div className="hidden space-x-2 md:flex">
                                 <CodeViewer routers={simulation?.routers} />
