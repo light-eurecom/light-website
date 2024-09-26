@@ -5,12 +5,10 @@ import type { NextRequest } from 'next/server'
 const checkServerStatus = async () => {
     try {
         const { data } = await axios.get(`${process.env.API_DOCKER_ENDPOINT}/health`);  // Flask health endpoint
-        console.log(data)
         if (data.status === "ok") {
             return true
         }
     } catch (error) {
-        console.log(error)
         return false
     }
 };
