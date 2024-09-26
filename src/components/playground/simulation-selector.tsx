@@ -34,7 +34,7 @@ export function SimulationSelector({ simulationId, ...props }: SimulationSelecto
   const [selectedPreset, setSelectedPreset] = React.useState<string>(simulationId)
   const { serverUp } = usePlayground()
 
-  const { data: simulations, isLoading } = useSWR('http://127.0.0.1:5002/simulations', fetcher, { revalidateOnFocus: true })
+  const { data: simulations, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/simulations`, fetcher, { revalidateOnFocus: true })
 
   return (
     <Popover open={open} onOpenChange={setOpen} {...props}>

@@ -35,7 +35,7 @@ export function PresetShare() {
             </Label>
             <Input
               id="link"
-              defaultValue={`http://localhost:3001${pathname}`}
+              defaultValue={`${process.env.NEXT_PUBLIC_HOST}${pathname}`}
               readOnly
               className="h-9"
             />

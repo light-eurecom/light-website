@@ -42,7 +42,7 @@ export default function PlaygroundLayout({
     const params = useParams();
     const simulationId = params.simulation_id as string;
 
-    const { data: simulation, isLoading } = useSWR(simulationId && `http://127.0.0.1:5002/simulations/${simulationId}`, fetcher)
+    const { data: simulation, isLoading } = useSWR(simulationId && `${process.env.NEXT_PUBLIC_API_ENDPOINT}/simulations/${simulationId}`, fetcher)
 
     if (isLoading) return <div className="fixed inset-0 flex items-center animate-pulse justify-center"><div className="flex gap-2 items-center"><Logomark /><span>Loading...</span></div></div>
 

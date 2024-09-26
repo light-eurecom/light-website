@@ -48,7 +48,7 @@ export function PlaygroundProvider({ children }: { children: ReactNode }) {
     useEffect(() => {
         const checkServerStatus = async () => {
             try {
-                const { data } = await axios.get("http://127.0.0.1:5002/health");  // Flask health endpoint
+                const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/health`);  // Flask health endpoint
                 if (data.status === "ok") {
                     setServerUp(true);
                 }
@@ -67,7 +67,7 @@ export function PlaygroundProvider({ children }: { children: ReactNode }) {
             description: "Starting simulation ! Should not take long.",
         })
         try {
-            const { data } = await axios.post(`http://127.0.0.1:5002/create_simulation`, {
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/create_simulation`, {
                 nb_receivers: clients[0],
                 nb_routers: routers[0]
             })
