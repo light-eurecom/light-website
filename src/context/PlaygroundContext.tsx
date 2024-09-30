@@ -49,7 +49,7 @@ export function PlaygroundProvider({ children }: { children: ReactNode }) {
         const checkServerStatus = async () => {
             try {
                 const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/health`);  // Flask health endpoint
-                if (data.status === "ok") {
+                if (data.ok) {
                     setServerUp(true);
                 }
             } catch (error) {

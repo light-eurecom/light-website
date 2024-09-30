@@ -22,7 +22,7 @@ import { models, types } from "@/components/playground/data/models"
 import { ModeToggle } from "@/components/ThemeSwitcher";
 import { Logomark } from '@/components/landing/Logo';
 import Link from 'next/link';
-import { PlaygroundProvider, usePlayground } from '@/context/PlaygroundContext'
+import { PlaygroundProvider } from '@/context/PlaygroundContext'
 import StartSimulation from '@/components/playground/start-simulation'
 import ServerStatus from '@/components/playground/server-status'
 import { useParams } from 'next/navigation';

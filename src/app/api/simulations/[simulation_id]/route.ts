@@ -1,0 +1,10 @@
+import axios from "axios";
+
+export const dynamic = 'force-static'
+
+export async function GET(
+    request: Request,
+    { params }: { params: { simulation_id: string } }) {
+    const { data } = await axios.get(`${process.env.REMOTE_API_ENPOINT}/simulations/${params.simulation_id}`);  // Flask health endpoint
+    return Response.json(data)
+}
