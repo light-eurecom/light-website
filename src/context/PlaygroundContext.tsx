@@ -67,7 +67,7 @@ export function PlaygroundProvider({ children }: { children: ReactNode }) {
             description: "Starting simulation ! Should not take long.",
         })
         try {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/create_simulation`, {
+            const { data } = await axios.post(`/api/simulations/new`, {
                 nb_receivers: clients[0],
                 nb_routers: routers[0]
             })

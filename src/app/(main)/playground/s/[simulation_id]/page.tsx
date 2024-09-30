@@ -10,7 +10,7 @@ import { fetcher } from '@/lib/fetcher';
 import { Logomark } from '@/components/landing/Logo';
 
 const page = ({ params }: { params: { simulation_id: string } }) => {
-    const { data: simulation, isLoading, error, mutate } = useSWR(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/simulations/${params.simulation_id}`, fetcher, { refreshInterval: 1500 })
+    const { data: simulation, isLoading, error, mutate } = useSWR(`/api/simulations/${params.simulation_id}`, fetcher, { refreshInterval: 1500 })
 
     if (error || simulation?.error == "404") return (
         <div className="relative flex h-full items-center py-22 lg:px-8">
