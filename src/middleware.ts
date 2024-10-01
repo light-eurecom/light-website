@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server'
 
 const checkServerStatus = async () => {
     try {
-        const { data } = await axios.get(`http://light-web:3000/api/health`);
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_HOST}/api/health`);
         console.log(data)
         return data.ok
     } catch (error) {

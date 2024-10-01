@@ -23,7 +23,7 @@ import {
 
 import { fetcher } from "@/lib/fetcher"
 import Link from "next/link"
-import { usePlayground } from "@/context/PlaygroundContext"
+import { useServerStatus } from "@/context/ServerStatusContext"
 
 interface SimulationSelectorProps extends PopoverProps {
   simulationId: string
@@ -32,7 +32,7 @@ interface SimulationSelectorProps extends PopoverProps {
 export function SimulationSelector({ simulationId, ...props }: SimulationSelectorProps) {
   const [open, setOpen] = React.useState(false)
   const [selectedPreset, setSelectedPreset] = React.useState<string>(simulationId)
-  const { serverUp } = usePlayground()
+  const { serverUp } = useServerStatus()
 
   const { data: simulations, isLoading } = useSWR(`api/simulations`, fetcher, { revalidateOnFocus: true })
 
