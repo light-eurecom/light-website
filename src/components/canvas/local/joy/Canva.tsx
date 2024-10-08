@@ -5,7 +5,6 @@ import CustomNode from './CustomNode';
 import 'reactflow/dist/style.css';
 import CacheIcon from '../../../CacheIcon';
 import ProgressBar from '../../ProgessBar';
-import DbIcon from '@/components/DbIcon';
 import dynamic from 'next/dynamic';
 import { ACTIONS, EVENTS, ORIGIN, STATUS, CallBackProps } from 'react-joyride';
 import { usePlayground } from '@/context/PlaygroundContext';
@@ -60,7 +59,7 @@ const Canva = ({ data }: { data: any }) => {
         nodeTypes={nodeTypes}
         fitView
         maxZoom={1.7}
-        minZoom={0.5}
+        minZoom={.1}
         proOptions={proOptions}
         className="bg-background"
       >
